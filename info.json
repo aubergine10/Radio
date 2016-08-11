@@ -1,0 +1,10 @@
+{
+	"name": "radio",
+	"version": "0.0.1",
+	"title": "Radio Signals",
+	"author": "aubergine18",
+	"description": "Use radio masts to transmit signals over huge distance, and surveillance sites to intercept enemy telemetary.",
+	"homepage": "https://github.com/aubergine10/Radio",
+	"factorio_version": "0.13",
+	"dependencies": ["base >= 0.13.0"]
+}
