@@ -55,8 +55,8 @@ do--sandbox
   local forSpying = { 'radio-espionage' , 'advanced-electronics' }
 
   -- extended effects
-  local masts   = { 'mast', 'receiver' }
-  local digital = { 'digital', 'splitter' }
+  local masts   = { 'wire-pack', 'mast-guide', 'mast-antenna', 'mast-segment', 'mast', 'receiver' }
+  local digital = { 'digital', 'mux', 'demux' }
   local wifi    = { 'wifi-wan', 'wifi-hub', 'wifi-card' }
 
   add { 'mast'        ,  nil        , 40  ,  masts      ; 'a-d-e'       }
