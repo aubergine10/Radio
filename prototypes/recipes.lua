@@ -2,7 +2,7 @@
 
 do--sandbox
 
-  local function add( recipe, ... )
+  local function add( recipe )
     local id = 'radio-'..table.remove( recipe, 1 )
 
     data:extend {{
@@ -10,7 +10,7 @@ do--sandbox
       name        = id,
       enabled     = false,
       category    = "crafting",
-      ingredients = { ... },
+      ingredients = recipe,
       result      = 'copper-cable' -- id
     }}
 
