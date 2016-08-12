@@ -18,6 +18,7 @@ do--sandbox
   end
 
   add { 'wire-pack', -- common ingredient for RF recipes
+        { 'copper-cable'      , 2   };
         { 'red-wire'          , 1   };
         { 'green-wire'        , 1   };
       }
@@ -27,7 +28,6 @@ do--sandbox
       }
       { 'mast-antenna', -- antennae for masts
         { 'copper-cable'      , 10  };
-        { 'radio-wire-pack'   , 2   };
         { 'small-lamp'        , 1   };
       }
       { 'mast-segment', -- segment for masts
@@ -78,7 +78,6 @@ do--sandbox
       }
       { 'wifi-hub', -- wire circuit <--> wifi gateway
         { 'radio-wire-pack'   , 6   };
-        { 'copper-cable'      , 2   };
         { 'advanced-circuit'  , 1   };
         { 'plastic-bar'       , 1   };
         { 'iron-plate'        , 1   };
@@ -86,7 +85,6 @@ do--sandbox
       { 'wifi-card', -- module that connects parent to wifi network
         { 'radio-wire-pack'   , 2   };
         { 'advanced-circuit'  , 1   };
-        { 'copper-cable'      , 1   };
         { 'plastic-bar'       , 1   };
       }
       { 'encrypt', -- encryption module for radio masts and receivers
