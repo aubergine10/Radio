@@ -2,16 +2,23 @@
 
 do--sandbox
 
+  -- science pack requirements
+  local basic    = { {'science-pack-1', 1}, {'science-pack-2', 1} }
+  local advanced = { {'science-pack-1', 2}, {'science-pack-2', 2},  {'science-pack-3', 1} }
+
   local function add( tech )
     local name, parent, packs, recipe, order = unpack( tech )
 
     if recipe then
-      recipe = { { type = 'unlock-recipe', recipe = 'recipe-radio-'..recipe } }
+      if type( recipe ) == 'string' then recipe = { recipe } end
+      for i=1, #recipe do
+        recipe[i] = { type = 'unlock-recipe', recipe = 'radio-'..recipe[i] }
+      end
     end
 
-    recipe = nil
-
-    parent = parent and {'radio-'..parent} or {'circuit-network'}
+    if type( parent ) ~= 'table' then
+      parent = parent and { 'radio-'..parent } or { 'circuit-network' }
+    end
 
     data:extend {{
       type = 'technology',
@@ -21,11 +28,8 @@ do--sandbox
       prerequisites = parent,
       effects = recipe,
       unit = {
-        count = packs,
-        ingredients = {
-          {'science-pack-1', 1},
-          {'science-pack-2', 1}
-        },
+        count = packs >= 150 and math.floor( packs/2 ) or packs,
+        ingredients = packs >= 150 and advanced or basic,
         time = math.floor( 15 * packs/40 )
       },
       order = order,
@@ -46,18 +50,25 @@ do--sandbox
         -- decrypt: decrypt module = allow some decryption
         -- passive: passive module = make snooper impossible to detect
 
-  -- note: num science packs must be >= 40
+  -- advanced prerequisites
+  local toDigital = { 'radio-phase'     , 'advanced-electronics' }
+  local forSpying = { 'radio-espionage' , 'advanced-electronics' }
 
-  add { 'mast'        ,  nil        , 40  , 'mast'      ; 'a-d-e'       }
+  -- extended effects
+  local masts   = { 'mast', 'receiver' }
+  local digital = { 'digital', 'splitter' }
+  local wifi    = { 'wifi-wan', 'wifi-hub', 'wifi-card' }
+
+  add { 'mast'        ,  nil        , 40  ,  masts      ; 'a-d-e'       }
       { 'phase'       , 'mast'      , 50  , 'modulator' ; 'a-d-e-a'     }
-      { 'digital'     , 'phase'     , 60  , 'digital'   ; 'a-d-e-a-a'   }
-      { 'wifi'        , 'digital'   , 100 , 'wifi'      ; 'a-d-e-a-a-a' }
+      { 'digital'     ,  toDigital  , 75  ,  digital    ; 'a-d-e-a-a'   }
+      { 'wifi'        , 'digital'   , 100 ,  wifi       ; 'a-d-e-a-a-a' }
       { 'advanced'    , 'digital'   , 80  ,  nil        ; 'a-d-e-a-a-b' }
       { 'encrypt'     , 'digital'   , 150 , 'encrypt'   ; 'a-d-e-a-a-c' }
       { 'snooping'    , 'mast'      , 50  , 'snooping'  ; 'a-d-e-b'     }
       { 'triangulate' , 'snooping'  , 100 ,  nil        ; 'a-d-e-b-a'   }
       { 'espionage'   , 'snooping'  , 80  ,  nil        ; 'a-d-e-b-b'   }
-      { 'passive'     , 'espionage' , 100 , 'passive'   ; 'a-d-e-b-b-a' }
-      { 'decrypt'     , 'espionage' , 150 , 'decrypt'   ; 'a-d-e-b-b-b' }
+      { 'passive'     ,  forSpying  , 100 , 'passive'   ; 'a-d-e-b-b-a' }
+      { 'decrypt'     ,  forSpying  , 150 , 'decrypt'   ; 'a-d-e-b-b-b' }
 
 end--sandbox
