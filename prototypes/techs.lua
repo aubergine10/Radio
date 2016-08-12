@@ -50,7 +50,7 @@ do--sandbox
         -- decrypt: decrypt module = allow some decryption
         -- passive: passive module = make snooper impossible to detect
 
-  -- advanced prerequisites
+  -- extended prerequisites
   local toDigital = { 'radio-phase'     , 'advanced-electronics' }
   local forSpying = { 'radio-espionage' , 'advanced-electronics' }
 
