@@ -1,6 +1,6 @@
 
-require 'prototypes.signals'
--- require 'prototypes.entities'
-require 'prototypes.items'
-require 'prototypes.recipes'
-require 'prototypes.techs'
+require 'prototypes.signal'
+-- require 'prototypes.entitie'
+require 'prototypes.item'
+require 'prototypes.recipe'
+require 'prototypes.tech'

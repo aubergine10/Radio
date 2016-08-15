@@ -1,7 +1,9 @@
 -- Usage:
 --   local mastNames = require '__radio__/mast_names'
 
-return {
+if _G.stations then return end
+
+_G.stations = {
   'Alpha',
   'Bravo',
   'Charlie',
